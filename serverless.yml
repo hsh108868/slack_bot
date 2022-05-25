@@ -1,0 +1,38 @@
+service: slack-albumbot
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-northwest-2
+  profile: hsh108868
+  environment:
+    SLACK_BOT_TOKEN: ${ssm:/slack-albumbot/slack-bot-token}
+    SLACK_SIGNING_SECRET: ${ssm:/slack-albumbot/slack-signing-secret}
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:PutObject"
+            - "s3:GetObeject"
+          Resource: "arn:aws:s3:::slackbot-images/*"
+
+resources:
+  Resources:
+    StorageBucket:
+      Type: "AWS::S3::Bucket"
+      Properties:
+        BucketName: slackbot-images
+
+
+functions:
+  slack:
+    handler: src/index.handler
+    url:
+      cors:true
