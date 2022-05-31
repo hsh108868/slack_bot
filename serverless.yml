@@ -1,6 +1,6 @@
 service: slack-albumbot
 
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 plugins:
   - serverless-esbuild
@@ -12,8 +12,8 @@ provider:
   region: ap-northwest-2
   profile: hsh108868
   environment:
-    SLACK_BOT_TOKEN: ${ssm:/slack-albumbot/slack-bot-token}
-    SLACK_SIGNING_SECRET: ${ssm:/slack-albumbot/slack-signing-secret}
+    SLACK_BOT_TOKEN: ${ssm:/slack-calendar/slack-bot-token}
+    SLACK_SIGNING_SECRET: ${ssm:/slack-calendar/slack-signing-secret}
   iam:
     role:
       statements:
@@ -21,18 +21,16 @@ provider:
           Action:
             - "s3:PutObject"
             - "s3:GetObeject"
-          Resource: "arn:aws:s3:::slackbot-images/*"
+          Resource: "arn:aws:s3:::slackbot-calendar/*"
 
 resources:
   Resources:
     StorageBucket:
       Type: "AWS::S3::Bucket"
       Properties:
-        BucketName: slackbot-images
-
+        BucketName: slackbot-calendar
 
 functions:
   slack:
     handler: src/index.handler
-    url:
-      cors:true
+    url: cors:true
