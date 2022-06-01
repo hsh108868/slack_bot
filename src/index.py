@@ -1,16 +1,14 @@
 import os
 import boto3
+import logging
+import json
+import urllib.request
 
 s3 = boto3.client('s3', region_name='ap-northwest-2')
 
 
-def awsLambdaReceiver():
-    signingSecret = process.env.SLACK_SIGNING_SECRET
-    return {
-        signingSecret: signingSecret
-    }
+def lambda_handler(event, context) -> str:
+    logging.info(json.dumps(event))
 
-
-def app():
-    return{token: process.env.SLACK_BOT_TOKEN,
-           "receiver": awsLambdaReceiver}
+    if "challenge" in event:
+        return event.get("challenge")
