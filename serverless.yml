@@ -1,5 +1,4 @@
-service: slack-albumbot
-
+service: slackbot-calendar
 frameworkVersion: "3"
 
 plugins:
