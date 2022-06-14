@@ -11,8 +11,8 @@ provider:
   region: ap-northwest-2
   profile: hsh108868
   environment:
-    SLACK_BOT_TOKEN: ${ssm:/slack-calendar/slack-bot-token}
-    SLACK_SIGNING_SECRET: ${ssm:/slack-calendar/slack-signing-secret}
+    SLACK_BOT_TOKEN: ${ssm:/slackbot-calendar/slack-bot-token}
+    SLACK_SIGNING_SECRET: ${ssm:/slackbot-calendar/slack-signing-secret}
   iam:
     role:
       statements:
