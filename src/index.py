@@ -11,5 +11,5 @@ def lambda_handler(event, context) -> str:
     json_region = os.environ['ap-northwest-2']
     logging.info(json.dumps(event))
 
-    if "challenge" in event:
+    if "upload" in event:
         return event.get("challenge")
