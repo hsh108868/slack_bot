@@ -13,3 +13,7 @@ def lambda_handler(event, context) -> str:
 
     if "upload" in event:
         return event.get("challenge")
+
+
+def main():
+    lambda_handler
