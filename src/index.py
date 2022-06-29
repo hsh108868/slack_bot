@@ -16,5 +16,5 @@ def lambda_handler(event, context) -> str:
 
 
 def main():
-    event = json.loads()
+    event = json.loads(s3)
     lambda_handler(event)
