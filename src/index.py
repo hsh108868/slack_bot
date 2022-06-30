@@ -4,11 +4,11 @@ import logging
 import json
 import urllib.request
 
-s3 = boto3.client('s3', region_name='ap-northwest-2')
+s3 = boto3.client('s3', region_name='ap-northeast-2')
 
 
 def lambda_handler(event, context) -> str:
-    json_region = os.environ['ap-northwest-2']
+    json_region = os.environ['ap-northeast-2']
     logging.info(json.dumps(event))
 
     if "upload" in event:
